@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cgw-p7-kJ6">
+                                <rect key="frame" x="0.0" y="818" width="414" height="44"/>
+                                <items>
+                                    <barButtonItem title="Pick" id="iMn-Tt-23D">
+                                        <connections>
+                                            <action selector="PickAnImage:" destination="BYZ-38-t0r" id="Uyd-ve-QXi"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="miC-0U-Ec7">
+                                <rect key="frame" x="0.0" y="44" width="414" height="774"/>
+                            </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2O4-Nr-sdb" userLabel="Top Text Field">
+                                <rect key="frame" x="159" y="138" width="97" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="16j-CE-I51" userLabel="Bottom Text Field">
+                                <rect key="frame" x="159" y="683" width="97" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="cgw-p7-kJ6" firstAttribute="centerX" secondItem="miC-0U-Ec7" secondAttribute="centerX" id="6Ny-ls-d9K"/>
+                            <constraint firstItem="miC-0U-Ec7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="HVn-J0-Fmu"/>
+                            <constraint firstItem="miC-0U-Ec7" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="KGe-8R-3aQ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="miC-0U-Ec7" secondAttribute="trailing" id="M7J-Tn-xfz"/>
+                            <constraint firstItem="cgw-p7-kJ6" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="VYK-lr-Guf"/>
+                            <constraint firstItem="cgw-p7-kJ6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Zvj-1f-f4R"/>
+                            <constraint firstItem="cgw-p7-kJ6" firstAttribute="top" secondItem="miC-0U-Ec7" secondAttribute="bottom" id="uyz-28-J79"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="BottomTextField" destination="16j-CE-I51" id="ahu-VC-cAb"/>
+                        <outlet property="ImagePickerView" destination="miC-0U-Ec7" id="lrE-v1-TBl"/>
+                        <outlet property="TopTextField" destination="2O4-Nr-sdb" id="a1P-bE-dua"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="20" y="94"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
