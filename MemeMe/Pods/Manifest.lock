@@ -1,0 +1,21 @@
+PODS:
+  - SPPermissions/Camera (5.4.1):
+    - SPPermissions/Core
+  - SPPermissions/Core (5.4.1)
+  - SPPermissions/PhotoLibrary (5.4.1):
+    - SPPermissions/Core
+
+DEPENDENCIES:
+  - SPPermissions/Camera
+  - SPPermissions/PhotoLibrary
+
+SPEC REPOS:
+  trunk:
+    - SPPermissions
+
+SPEC CHECKSUMS:
+  SPPermissions: a093e8045c7aeb23a08acda6d288e3543f27f8fa
+
+PODFILE CHECKSUM: 8b69a368dae25f75e1cbf3cb2e71fcc824dcc8b9
+
+COCOAPODS: 1.10.1
