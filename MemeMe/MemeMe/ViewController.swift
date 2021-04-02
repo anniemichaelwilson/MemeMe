@@ -20,6 +20,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var TopTextField: UITextField!
     @IBOutlet weak var BottomTextField: UITextField!
     
+    //MARK: Variables
+    // camaera available on device
+    var cameraEligibleDevice = UIImagePickerController.isSourceTypeAvailable(.camera)
+    // stores permissions
+    var cameraAllowed = false
+    var photoAllowed = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.TopTextField.delegate = self.topDelegate
@@ -31,11 +38,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     @IBAction func PickAnImage(_ sender: Any) {
-        requestPermission()
-           
-        
+        // after pick image is clicked check the permissions
+        permCheck()
+        print(cameraEligibleDevice, cameraAllowed, photoAllowed)
+        // check to see if the device has a camera and present the appropriate alert
+        if cameraEligibleDevice && cameraAllowed && photoAllowed {
+            presentActionAlert()
+        } else if photoAllowed {
+            presentActionAlert()
+        } else {
+            requestPermission()
+        }
     }
     
+    //function to present camera
     func camera() {
            let myPickerControllerCamera = UIImagePickerController()
            myPickerControllerCamera.delegate = self
@@ -44,6 +60,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
            self.present(myPickerControllerCamera, animated: true, completion: nil)
        }
     
+    //function to present gallery
     func gallery() {
         let myPickerControllerGallery = UIImagePickerController()
         myPickerControllerGallery.delegate = self
@@ -51,13 +68,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         myPickerControllerGallery.allowsEditing = true
         self.present(myPickerControllerGallery, animated: true, completion: nil)
     }
+    
+    //function to pick the image
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[.editedImage] as? UIImage  {
             ImagePickerView.image = image
         }
         picker.dismiss(animated: true)
     }
-    
     
     func presentActionAlert() {
     //Create the AlertController and add Its action like button in Actionsheet
@@ -76,34 +94,42 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     actionSheetController.addAction(cancelActionButton)
     actionSheetController.addAction(galleryActionButton)
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+        //If the device has a camera available show camera optiosn
+        if cameraEligibleDevice {
             actionSheetController.addAction(cameraActionButton)
         }
     
     self.present(actionSheetController, animated: true, completion: nil)
     }
-    
+
+    // show permissions based on camera being available
     func requestPermission() {
-
-        let cameraState = SPPermission.camera.isAuthorized
-        let photoLibraryState = SPPermission.photoLibrary.isAuthorized
-        let controller = SPPermissions.list([.camera, .photoLibrary])
-
+        var controller = SPPermissions.list([.camera, .photoLibrary])
+        if !cameraEligibleDevice {
+            controller = SPPermissions.list([.photoLibrary])
+        }
         controller.titleText = "Permissions"
         controller.headerText = "Please allow to get started"
         controller.footerText = "These are required to continue"
-        
         controller.delegate = self
+        controller.present(on: self)
         
-        if !cameraState || !photoLibraryState {
-            controller.present(on: self)
-        } else {
+        permCheck()
+        print(cameraEligibleDevice, cameraAllowed, photoAllowed)
+        if !cameraEligibleDevice && photoAllowed {
             presentActionAlert()
+        } else if cameraAllowed && photoAllowed {
+            presentActionAlert()
+        } else {
+            print("Permissions denied")
         }
-        
-
-        
-
     }
+    
+    // function to check camera and photo permission state
+    func permCheck() {
+        cameraAllowed = SPPermission.camera.isAuthorized
+        photoAllowed = SPPermission.photoLibrary.isAuthorized
+    }
+   
 }
 
